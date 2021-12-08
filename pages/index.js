@@ -19,7 +19,6 @@ export default function Home({ exploreData, cardsData }) {
             <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {exploreData?.map(({ img, distance, location }) => {
-                console.log(img, location, distance);
                 return (
                   <SmallCard
                     key={img}
@@ -34,9 +33,11 @@ export default function Home({ exploreData, cardsData }) {
         </section>
         <section>
           <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
-          {cardsData?.map(({ img, title }) => (
-            <MediumCard key={img} img={img} title={title} />
-          ))}
+          <div className="flex space-x-3 overflow-scroll py-3 scrollbar-hide">
+            {cardsData?.map(({ img, title }) => (
+              <MediumCard key={img} img={img} title={title} />
+            ))}
+          </div>
         </section>
       </main>
     </div>
@@ -47,7 +48,7 @@ export async function getStaticProps() {
   const exploreData = await fetch("https://links.papareact.com/pyp").then(
     (res) => res.json()
   );
-  const cardsData = await fetch("https://links.papareact.com/zpl").then((res) =>
+  const cardsData = await fetch("https://links.papareact.com/zp1").then((res) =>
     res.json()
   );
   return {
